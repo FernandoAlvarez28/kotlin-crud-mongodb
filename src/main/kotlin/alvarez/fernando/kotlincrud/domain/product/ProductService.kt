@@ -1,6 +1,8 @@
 package alvarez.fernando.kotlincrud.domain.product
 
 import alvarez.fernando.kotlincrud.domain.purchase.PurchasedProduct
+import org.springframework.data.domain.Sort
+import org.springframework.data.domain.Sort.Order
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
@@ -11,7 +13,7 @@ import java.util.stream.Collectors
 class ProductService(private val productRepository: ProductRepository) {
 
     fun findAll(): Flux<Product> {
-        return this.productRepository.findAll()
+        return this.productRepository.findAll(Sort.by(Order.asc("name")))
     }
 
     fun mapAllAvailableById(ids: Collection<UUID>): Mono<MutableMap<UUID, Product>> {

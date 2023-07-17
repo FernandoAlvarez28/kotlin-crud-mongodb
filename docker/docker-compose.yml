@@ -12,13 +12,31 @@ services:
     volumes:
       - ./mockoon:/config
 
-  postgres:
-    image: postgres
+  mongo:
+    image: mongo
     environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "blue-elephant" #Postgres's logo is an elephant :P
+      - MONGO_INITDB_ROOT_USERNAME=mango
+      - MONGO_INITDB_ROOT_PASSWORD=fruit
+      - MONGO_INITDB_DATABASE=kotlin_crud
+    restart: unless-stopped
     ports:
-      - "65432:5432" #Different port to not conflict with any possible real/default Postgres installation
+      - "47017:27017" #Different port to not conflict with any possible running MongoDB installation
+  mongo-express:
+    image: mongo-express
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=mango
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=fruit
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=password
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    ports:
+      - "8081:8081"
 
 networks:
   mockoon:

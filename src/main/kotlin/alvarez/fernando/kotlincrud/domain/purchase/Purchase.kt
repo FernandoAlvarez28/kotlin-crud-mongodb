@@ -1,12 +1,13 @@
 package alvarez.fernando.kotlincrud.domain.purchase
 
 import org.springframework.data.annotation.Id
-import org.springframework.data.relational.core.mapping.Table
+import org.springframework.data.mongodb.core.mapping.Document
 import java.math.BigDecimal
 import java.time.LocalDateTime
 import java.util.*
+import kotlin.collections.ArrayList
 
-@Table
+@Document
 class Purchase (
         //Named "Purchase" and not "Order" to not conflict with DB keywords
 
@@ -16,15 +17,15 @@ class Purchase (
         var totalProducts: Int = 0,
         var purchasedAt: LocalDateTime = LocalDateTime.now(),
 
-        //Spring Data R2DBC doesn't support @OneToMany to map the PurchasedProducts :(
+        var purchasedProducts: Collection<PurchasedProduct> = ArrayList()
 
 ) {
 
-    fun calculateTotals(purchasedProducts: Collection<PurchasedProduct>) {
-        this.totalProducts = purchasedProducts.size
+    fun calculateTotals() {
+        this.totalProducts = this.purchasedProducts.size
         this.totalValue = BigDecimal.ZERO
 
-        for (purchasedProduct in purchasedProducts) {
+        for (purchasedProduct in this.purchasedProducts) {
             this.totalValue = this.totalValue.add(purchasedProduct.paidPrice)
         }
     }

@@ -18,11 +18,11 @@ data class PurchaseApiDetailedOutput (
         val purchasedProducts: List<PurchasedProductApiOutput> //Should be Flux<PurchasedProductApiOutput> ?
 ) {
 
-    constructor(purchase: Purchase, purchasedProducts: Collection<PurchasedProduct>) : this(
+    constructor(purchase: Purchase) : this(
             id = purchase.id,
             totalValue = purchase.totalValue,
             purchasedAtMs = purchase.purchasedAt.toEpochMilli(),
-            purchasedProducts = PurchasedProductApiOutput.from(purchasedProducts)
+            purchasedProducts = PurchasedProductApiOutput.from(purchase.purchasedProducts)
     )
 }
 

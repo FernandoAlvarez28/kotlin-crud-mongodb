@@ -2,11 +2,11 @@ package alvarez.fernando.kotlincrud.domain.purchase
 
 import alvarez.fernando.kotlincrud.domain.product.Product
 import alvarez.fernando.kotlincrud.extensions.multiply
-import org.springframework.data.relational.core.mapping.Table
+import org.springframework.data.mongodb.core.mapping.Document
 import java.math.BigDecimal
 import java.util.*
 
-@Table
+@Document
 class PurchasedProduct (
 
         var purchaseId: UUID,

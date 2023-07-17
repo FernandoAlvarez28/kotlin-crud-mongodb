@@ -1,14 +1,14 @@
 package alvarez.fernando.kotlincrud.domain.product
 
 import org.springframework.data.annotation.Id
-import org.springframework.data.relational.core.mapping.Table
+import org.springframework.data.mongodb.core.mapping.Document
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import java.math.BigDecimal
 import java.time.LocalDateTime
 import java.util.*
 
-@Table
+@Document
 class Product (
 
     @Id

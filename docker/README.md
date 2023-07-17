@@ -17,24 +17,26 @@ To serve fake generated users to be used on login.
     - Feel free to use `-d` or any other command that does the same thing.
 - The [Postman collection](../docs/fernandos-kotlin-crud.postman_collection.json) + [environment](../docs/fernandos-kotlin-crud.postman_environment.json) also have the mocked endpoints.
 
-## Postgres
-I's one of the most used relational databases.
+## MongoDB
+I's one of the most used NoSQL databases.
 
-https://www.postgresql.org/
+https://www.mongodb.com/
 
 ### How it is used here
-It is the main database for the data used and stored by the application
+It is the main database for the data used and stored by the application.
 
 ### How to run
-- Run the [./start-postgres.sh](./start-postgres.sh) script from your terminal.
-  - Or start manually via [docker-compose](https://docs.docker.com/compose/): `sudo docker-compose up postgres`
+- Run the [./start-mongodb.sh](./start-mongodb.sh) script from your terminal.
+  - Or start manually via [docker-compose](https://docs.docker.com/compose/): `sudo docker-compose up mongo mongo-express`
     - Feel free to use `-d` or any other command that does the same thing.
-- You can connect to it with an DBMS of your choice (like [DBeaver](https://dbeaver.io/)):
+- You can connect to it with an administrative tool of your choice, or with the [Mongo Express](https://github.com/mongo-express/mongo-express) Docker image that's also included:
   - Host: `localhost`
-  - Port: `65432`
-  - User: `postgres`
-  - Password: `blue-elephant`
-  - Schema: `kotlin_crud`
-- As the application uses [Flyway migrations](https://flywaydb.org/), it will initialize the schema on the first run.
-- You can reset the stored data by running the [./reset-postgres.sh](./reset-postgres.sh) script from your terminal.
-  - Or by running manually via [docker-compose](https://docs.docker.com/compose/): `docker-compose rm -s -f -v postgres` ([source](https://stackoverflow.com/a/71796529))
+  - Port: `47017`
+  - Database user: `mango`
+  - Database password: `fruit`
+  - Database name: `kotlin_crud`
+  - Mongo Express URL: http://localhost:8081
+  - Admin user: `admin`
+  - Admin password: `password`
+- You can reset the stored data by running the [./reset-mongodb.sh](./reset-mongodb.sh) script from your terminal.
+  - Or by running manually via [docker-compose](https://docs.docker.com/compose/): `docker-compose rm -s -f -v mongo mongo-express` ([source](https://stackoverflow.com/a/71796529))

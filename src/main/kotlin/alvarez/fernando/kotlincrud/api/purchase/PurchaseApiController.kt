@@ -53,12 +53,8 @@ class PurchaseApiController(private val logger: Logger = Logger.getLogger(Purcha
     }
 
     private fun createDetailedOutputMono(purchase: Mono<Purchase>): Mono<PurchaseApiDetailedOutput> {
-        return purchase.flatMap {
-            return@flatMap this.purchaseService.getPurchasedProducts(it)
-                .collectList()
-                .map {
-                        purchasedProducts -> PurchaseApiDetailedOutput(it, purchasedProducts)
-                }
+        return purchase.map {
+            PurchaseApiDetailedOutput(it)
         }
     }
 

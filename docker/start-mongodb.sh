@@ -1,1 +1,1 @@
-sudo docker-compose up mongo mongo-express
+docker-compose up mongo mongo-express

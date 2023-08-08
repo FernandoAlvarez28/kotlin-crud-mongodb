@@ -2,5 +2,6 @@
 	{"name": "Wonder Woman''s invisible plane", "unitPrice": 6816773.7, "availableQuantity": 1},
 	{"name": "Sonic Stopstation 5", "unitPrice": 539.99, "availableQuantity": 200},
 	{"name": "Macrosoft Xcrate One", "unitPrice": 249.99, "availableQuantity": 360},
-	{"name": "Nashi Pear YouPhone", "unitPrice": 899.00, "availableQuantity": 15, "//comment": "Nashi pear is a fruit visually similar to an apple"}
+	{"name": "Nashi Pear YouPhone", "unitPrice": 899.00, "availableQuantity": 15, "//comment": "Nashi pear is a fruit visually similar to an apple"},
+	{"name": "Air", "unitPrice": 0.01, "availableQuantity": 2147483647, "//comment": "To test with K6"}
 ]

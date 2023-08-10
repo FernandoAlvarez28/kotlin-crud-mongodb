@@ -4,9 +4,8 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.beans.BeanInstantiationException
 import org.springframework.stereotype.Component
-import java.io.File
+import java.io.InputStream
 import java.math.BigDecimal
-import java.net.URL
 import java.util.*
 import java.util.logging.Logger
 
@@ -22,14 +21,12 @@ class ProductInit(
         if (this.productRepository.count().block()?.toInt() == 0) {
             this.logger.info("Initializing Products")
             val classLoader = javaClass.classLoader
-            val jsonUrl: URL = classLoader.getResource(this.initialProductsJson)
+            val jsonInputStream: InputStream = classLoader.getResourceAsStream(this.initialProductsJson)
                 ?: throw BeanInstantiationException(javaClass, "File \"$initialProductsJson\" not found")
-
-            val jsonFile = File(jsonUrl.toURI())
 
             val products: MutableList<Product>
             try {
-                val parsedJson: List<Map<String, Any>> = this.jsonObjectMapper.readValue(jsonFile, ListedMapTypeReference())
+                val parsedJson: List<Map<String, Any>> = this.jsonObjectMapper.readValue(jsonInputStream, ListedMapTypeReference())
 
                 products = ArrayList(parsedJson.size)
                 for (map in parsedJson) {

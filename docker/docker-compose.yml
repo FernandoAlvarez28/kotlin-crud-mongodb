@@ -2,17 +2,36 @@ version: '3.4'
 
 services:
 
+  kotlincrud-mongodb:
+    container_name: kotlincrud-mongodb
+    image: kotlincrud-mongodb:latest
+    build:
+      dockerfile: Dockerfile
+      context: ./../
+    environment:
+      - APP_DATABASE_HOST=mongo
+      - APP_DATABASE_PORT=27017
+      - APP_DATABASE_NAME=kotlin_crud
+      - APP_DATABASE_USERNAME=mango
+      - APP_DATABASE_PASSWORD=fruit
+      - USERS_API_MOCKOON_URL=http://mockoon:8180
+    depends_on:
+      - mockoon
+      - mongo
+    ports:
+      - "8080:8080"
+
   mockoon:
+    container_name: mockoon
     image: mockoon/cli
     command: -p 8180 -d /config/users-api.json
-    networks:
-      - mockoon
     ports:
       - "8180:8180"
     volumes:
       - ./mockoon:/config
 
   mongo:
+    container_name: mongo
     image: mongo
     environment:
       - MONGO_INITDB_ROOT_USERNAME=mango
@@ -82,8 +101,6 @@ services:
       - "host.docker.internal:host-gateway"
 
 networks:
-  mockoon:
-    driver: bridge
   k6:
     driver: bridge
   grafana:

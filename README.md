@@ -9,6 +9,7 @@ Based on the Postgres CRUD: https://github.com/FernandoAlvarez28/kotlin-crud
 
 ## Contains/Uses
 - **Java 17**.
+- [Dockerfile](Dockerfile).
 - Basic REST API endpoints with **Kotlin**, **Spring Boot 3.1.1** and **Spring WebFlux**.
   - Check/Import the [Postman collection](docs/fernandos-kotlin-crud.postman_collection.json) + [environment](docs/fernandos-kotlin-crud.postman_environment.json).
 - **MongoDB database** via Docker.
